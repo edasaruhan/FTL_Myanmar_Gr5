@@ -1,6 +1,7 @@
-from model import Embedder, Generator
-from vector_store import VectorStore
+from .model import Embedder, Generator
+from .vector_store import VectorStore
 from sklearn.preprocessing import normalize
+from langsmith import traceable
 
 class RAG_pipeline:
     def __init__(self):
@@ -32,10 +33,12 @@ class RAG_pipeline:
             for doc_id, score, meta, _ in results
         ]
 
+    @traceable
     def _build_prompt(self, query, passages):
         context = "".join([f"[{p['id']}] {p['text']}" for p in passages])
         return f"Use the retrieved passages to answer the question. You have a medical knowledge about mind. Answer the user question to motivately and user should be motivated after hearing your answer. {context} Question: {query} Answer:"
 
+    @traceable
     def generate(self, query, k=4):
         retrieved = self.retrieve(query, k)
         prompt = self._build_prompt(query, retrieved)

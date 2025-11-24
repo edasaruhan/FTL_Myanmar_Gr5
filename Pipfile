@@ -15,8 +15,11 @@ openai = "*"
 requests = "*"
 beautifulsoup4 = "*"
 speechrecognition = "*"
-pyaudio = "*"
 gtts = "*"
+simpletransformers = "*"
+fastapi = "*"
+uvicorn = "*"
+langsmith = "*"
 
 [dev-packages]
 ipykernel = "*"

@@ -1,21 +1,28 @@
-from rag_flow import RAG_pipeline
-# from rag_evaluator import RAGEvaluator
+import sys
+import os
 
-def main():
-    with open("mental_health.txt", "r", encoding="utf-8") as f:
-        text = f.read()
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
-    docs = [
-        {"id": "doc1", "text": text, "meta": {"title": "Mental Health Overview"}}
-    ]
+from .rag_flow import RAG_pipeline
+from dotenv import load_dotenv 
+from langsmith import traceable
 
-    rag = RAG_pipeline()
-    rag.add_documents(docs)
+load_dotenv()
 
-    query = "i am having a depression now"
-    result = rag.generate(query, k=2)
+class RAGChatbot:
+    def __init__(self, docs=None):
+        self.rag = RAG_pipeline()
+        
+        if docs:
+            self.add_documents(docs)
+    
+    def add_documents(self, docs):
+        self.rag.add_documents(docs)
 
-    print(result["answer"])
+    @traceable
+    def ask(self, query, k=2):
+        response = self.rag.generate(query, k=k)
+        return response["answer"]
 
-if __name__ == "__main__":
-    main()
