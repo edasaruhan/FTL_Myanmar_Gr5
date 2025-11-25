@@ -29,7 +29,6 @@ if st.button("Send"):
         
         st.session_state.messages.append({"role": "assistant", "content": ai_reply})
 
-# Display chat messages
 for msg in st.session_state.messages:
     if msg["role"] == "user":
         st.markdown(f"<p style='text-align:right; background:#d9eaff; padding:10px; border-radius:10px;'><b>You:</b> {msg['content']}</p>", unsafe_allow_html=True)
