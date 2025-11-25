@@ -42,7 +42,8 @@ with col1:
 with col2:
     st.markdown('<div class="button-container">', unsafe_allow_html=True)
     if st.button("AI Doctor Diagnose", key="ai_doctor_button"):
-        pass  
+        st.switch_page("pages/ai_diagose.py")   
+
     st.markdown('</div>', unsafe_allow_html=True)
 
 
