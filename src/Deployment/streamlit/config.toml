@@ -1,0 +1,11 @@
+[theme]
+# Primary accent color (Blue)
+primaryColor="#1E88E5" 
+# Background color (Light subtle blue-gray)
+backgroundColor="#F0F8FF" 
+# Secondary background color for sidebar/containers (Slightly darker blue-gray)
+secondaryBackgroundColor="#E6F2FF" 
+# Text color (Dark Gray/Black)
+textColor="#262730" 
+# Font family
+font="sans serif"
