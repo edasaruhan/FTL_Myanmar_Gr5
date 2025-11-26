@@ -19,7 +19,7 @@ class Embedder:
 class Generator:
     def __init__(self):
         self.client = OpenAI(
-            api_key=os.getenv("OPENAI"),
+            api_key= os.getenv("OPENAI"),
             base_url="https://openrouter.ai/api/v1"
         )
 

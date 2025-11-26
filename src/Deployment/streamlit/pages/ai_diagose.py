@@ -5,9 +5,6 @@ import speech_recognition as sr
 from streamlit_mic_recorder import mic_recorder
 from pydub import AudioSegment
 
-# -------------------------------------------------
-# Streamlit Page Setup
-# -------------------------------------------------
 st.set_page_config(page_title="AI Doctor Diagnose", layout="wide")
 
 recognizer = sr.Recognizer()
@@ -24,19 +21,13 @@ st.markdown("<h3 style='text-align:center; color:black;'>Speak your symptoms and
             unsafe_allow_html=True)
 st.markdown("---")
 
-# -------------------------------------------------
-# Session State
-# -------------------------------------------------
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
 if "last_audio_processed" not in st.session_state:
     st.session_state.last_audio_processed = None
 
-# -------------------------------------------------
-# Voice Input Section
-# -------------------------------------------------
-st.write("### 🎤 Voice Input")
+st.write("### Talk what you suffering")
 audio_data = mic_recorder(
     start_prompt="🎤 Start Recording",
     stop_prompt="🛑 Stop Recording",
@@ -48,12 +39,8 @@ if audio_data and audio_data != st.session_state.last_audio_processed:
 
     st.session_state.last_audio_processed = audio_data
 
-    # Preview audio in UI
     st.audio(audio_data["bytes"])
 
-    # -------------------------------------------------
-    # Convert Browser WebM → WAV for SpeechRecognition
-    # -------------------------------------------------
     with open("temp_input.webm", "wb") as f:
         f.write(audio_data["bytes"])
 
@@ -62,25 +49,19 @@ if audio_data and audio_data != st.session_state.last_audio_processed:
         sound = sound.set_frame_rate(16000).set_channels(1)
         sound.export("temp_audio.wav", format="wav")
     except Exception as e:
-        st.error(f"❌ Audio conversion failed: {e}")
+        st.error(f"Audio conversion failed: {e}")
         st.stop()
 
-    # -------------------------------------------------
-    # Speech Recognition
-    # -------------------------------------------------
     user_text = ""
     try:
         with sr.AudioFile("temp_audio.wav") as source:
             audio = recognizer.record(source)
             user_text = recognizer.recognize_google(audio, language="en-US")
-            st.success(f"**Recognized Speech:** {user_text}")
+            # st.success(f"**Recognized Speech:** {user_text}")
     except Exception as e:
-        st.error(f"❌ Speech could not be recognized: {e}")
+        st.error(f"Speech could not be recognized: {e}")
         user_text = ""
 
-    # -------------------------------------------------
-    # Send text to AI Backend
-    # -------------------------------------------------
     if user_text.strip():
         st.session_state.messages.append({"role": "user", "content": user_text})
 
@@ -96,12 +77,8 @@ if audio_data and audio_data != st.session_state.last_audio_processed:
         except Exception as e:
             ai_reply = f"Request failed: {e}"
 
-        # Save assistant reply
         st.session_state.messages.append({"role": "assistant", "content": ai_reply})
 
-        # -------------------------------------------------
-        # Text-to-Speech
-        # -------------------------------------------------
         try:
             tts_engine.say(ai_reply)
             tts_engine.runAndWait()
@@ -109,9 +86,6 @@ if audio_data and audio_data != st.session_state.last_audio_processed:
         except:
             st.warning("Voice output unavailable.")
 
-# -------------------------------------------------
-# Chat History UI
-# -------------------------------------------------
 for msg in st.session_state.messages:
     if msg["role"] == "user":
         st.markdown(
