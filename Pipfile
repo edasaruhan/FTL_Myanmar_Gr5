@@ -20,6 +20,11 @@ simpletransformers = "*"
 fastapi = "*"
 uvicorn = "*"
 langsmith = "*"
+pyttsx3 = "*"
+streamlit-webrtc = "*"
+streamlit-mic-recorder = "*"
+pydub = "*"
+pyaudio = "*"
 
 [dev-packages]
 ipykernel = "*"
