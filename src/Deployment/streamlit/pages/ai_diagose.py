@@ -14,7 +14,7 @@ tts_engine.setProperty('rate', 150)
 
 st.markdown(
     '<div style="background-color:#1E90FF;padding:20px;border-radius:10px;text-align:center;">'
-    '<h1 style="color:white;">AI Doctor Diagnose 🤖</h1></div>',
+    '<h1 style="color:white;">AI Doctor Diagose 🤖</h1></div>',
     unsafe_allow_html=True
 )
 st.markdown("<h3 style='text-align:center; color:black;'>Speak your symptoms and wait for the doctor</h3>",

@@ -64,3 +64,27 @@ with adv_col:
 with video_col:
     st.markdown("### Watch MindCare in Action")
     st.video("/Users/yebhonelin/Documents/github/FTL_Myanmar_Gr5/src/docs/medical_assistant_vd.mov", format="video/mp4", start_time=0, autoplay=True, muted=True)
+
+st.write("---")
+
+video_col, adv_col = st.columns([1, 1])
+
+with adv_col:
+    st.markdown("### Advantages of AI Doctor Diagnose")
+
+    st.markdown("""
+    <ul style='font-size:22px; line-height:1.6;'>
+        <li>Provides personalized mental health support</li>
+        <li>Available 24/7</li>
+        <li>Offers AI-driven guidance and advice</li>
+        <li>Gives instant responses without waiting</li>
+        <li>Helps with early detection of symptoms</li>
+        <li>Supports users in remote or rural areas</li>
+        <li>Reduces unnecessary clinic visits</li>
+    </ul>
+    """, unsafe_allow_html=True)
+
+
+with video_col:
+    st.markdown("### Watch AI Doctor Diagnose in Action")
+    st.video("/Users/yebhonelin/Documents/github/FTL_Myanmar_Gr5/src/docs/ai_diagonse.mov", format="video/mp4", start_time=0, autoplay=True, muted=True)
