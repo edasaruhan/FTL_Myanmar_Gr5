@@ -3,11 +3,6 @@ import requests
 
 st.set_page_config(page_title="Medical Assistant")
 
-CURRENT_PAGE = "medical_assistant"
-
-
-
-
 st.markdown('<div style="background-color:#1E90FF;padding:20px;border-radius:10px;text-align:center;"><h1 style="color:white;">Medical Assistant 🤖</h1></div>', unsafe_allow_html=True)
 st.markdown("<h3 style='text-align:center; color:black;'>Ask any medical question below</h3>", unsafe_allow_html=True)
 st.markdown("---")
@@ -34,11 +29,35 @@ if st.button("Send"):
         
         st.session_state.messages.append({"role": "assistant", "content": ai_reply})
 
+# Display chat messages
 for msg in st.session_state.messages:
     if msg["role"] == "user":
         st.markdown(f"<p style='text-align:right; background:#d9eaff; padding:10px; border-radius:10px;'><b>You:</b> {msg['content']}</p>", unsafe_allow_html=True)
     else:
         st.markdown(f"<p style='text-align:left; background:#f0f0f0; padding:10px; border-radius:10px;'><b>Assistant:</b> {msg['content']}</p>", unsafe_allow_html=True)
 
-if st.button("Clear Chat"):
+# Clear Chat button at bottom right using CSS
+clear_button = """
+<style>
+.clear-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FF4B4B;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+}
+</style>
+<form action="" method="post">
+    <button class="clear-btn" name="clear" type="submit">Clear Chat</button>
+</form>
+"""
+
+st.markdown(clear_button, unsafe_allow_html=True)
+
+if "clear" in st.experimental_get_query_params():
     st.session_state.messages = []
