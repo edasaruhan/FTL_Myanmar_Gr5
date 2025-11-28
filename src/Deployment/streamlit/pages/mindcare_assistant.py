@@ -3,6 +3,11 @@ import requests
 
 st.set_page_config(page_title="Medical Assistant")
 
+CURRENT_PAGE = "medical_assistant"
+
+
+
+
 st.markdown('<div style="background-color:#1E90FF;padding:20px;border-radius:10px;text-align:center;"><h1 style="color:white;">Medical Assistant 🤖</h1></div>', unsafe_allow_html=True)
 st.markdown("<h3 style='text-align:center; color:black;'>Ask any medical question below</h3>", unsafe_allow_html=True)
 st.markdown("---")
@@ -35,3 +40,5 @@ for msg in st.session_state.messages:
     else:
         st.markdown(f"<p style='text-align:left; background:#f0f0f0; padding:10px; border-radius:10px;'><b>Assistant:</b> {msg['content']}</p>", unsafe_allow_html=True)
 
+if st.button("Clear Chat"):
+    st.session_state.messages = []
