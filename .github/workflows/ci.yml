@@ -2,9 +2,13 @@ name: Medical CI Pipeline
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: 
+      - main
+      - dev
   pull_request:
-    branches: [ main, dev ]
+    branches:
+      - main
+      - dev
 
 concurrency:
   group: ci-${{ github.ref_name }}
@@ -55,4 +59,3 @@ jobs:
       - name: Audit dependencies
         run: pip-audit -r requirements.txt
         continue-on-error: true
-
