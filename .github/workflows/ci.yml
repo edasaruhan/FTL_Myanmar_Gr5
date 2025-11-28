@@ -1,13 +1,10 @@
-name: CI
+name: Medical pipeline
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [ main, dev ]
   pull_request:
-    branches: [ main, master, develop ]
-
-permissions:
-  contents: read
+    branches: [ main, dev ]
 
 concurrency:
   group: ci-${{ github.ref }}
