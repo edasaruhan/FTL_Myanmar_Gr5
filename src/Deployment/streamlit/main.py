@@ -2,6 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="MindCare", layout="wide")
 
+
 st.markdown('<div style="background-color:#1E90FF;padding:40px;border-radius:10px;text-align:center;"><h1 style="color:white; font-size:60px;">MindCare 🤖</h1></div>', unsafe_allow_html=True)
 st.markdown('<h2 style="text-align:center; color:black; font-size:30px;">Invest in Your Inner Well-being</h2>', unsafe_allow_html=True)
 st.markdown("---")
