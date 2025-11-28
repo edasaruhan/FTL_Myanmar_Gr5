@@ -3,10 +3,12 @@ from sklearn.preprocessing import normalize
 
 try:
     import faiss
+
     _HAS_FAISS = True
 except:
     _HAS_FAISS = False
     from sklearn.neighbors import NearestNeighbors
+
 
 class VectorStore:
     def __init__(self, dim):
@@ -40,7 +42,9 @@ class VectorStore:
             index.add(self.embeddings)
             self._index = index
         else:
-            nn = NearestNeighbors(n_neighbors=min(10, len(self.embeddings)), metric="cosine")
+            nn = NearestNeighbors(
+                n_neighbors=min(10, len(self.embeddings)), metric="cosine"
+            )
             nn.fit(self.embeddings)
             self._index = nn
 
@@ -60,7 +64,9 @@ class VectorStore:
                 results.append((self.ids[idx], float(score), self.metadatas[idx], idx))
             return results
         else:
-            dist, idxs = self._index.kneighbors([query_embedding], n_neighbors=min(k, len(self.ids)))
+            dist, idxs = self._index.kneighbors(
+                [query_embedding], n_neighbors=min(k, len(self.ids))
+            )
             results = []
             for d, idx in zip(dist[0], idxs[0]):
                 score = 1 - float(d)

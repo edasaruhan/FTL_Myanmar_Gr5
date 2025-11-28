@@ -1,6 +1,7 @@
-from sentence_transformers import SentenceTransformer
 import numpy as np
+from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
+
 
 class RAGEvaluator:
     def __init__(self, embedder_model="all-MiniLM-L6-v2"):

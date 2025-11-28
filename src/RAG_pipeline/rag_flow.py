@@ -1,7 +1,9 @@
+from langsmith import traceable
+from sklearn.preprocessing import normalize
+
 from .model import Embedder, Generator
 from .vector_store import VectorStore
-from sklearn.preprocessing import normalize
-from langsmith import traceable
+
 
 class RAG_pipeline:
     def __init__(self):

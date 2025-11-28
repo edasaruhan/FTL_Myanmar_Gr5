@@ -1,24 +1,26 @@
-import streamlit as st
-import requests
 import pyttsx3
+import requests
 import speech_recognition as sr
-from streamlit_mic_recorder import mic_recorder
+import streamlit as st
 from pydub import AudioSegment
+from streamlit_mic_recorder import mic_recorder
 
 st.set_page_config(page_title="AI Doctor Diagnose", layout="wide")
 
 recognizer = sr.Recognizer()
 
 tts_engine = pyttsx3.init()
-tts_engine.setProperty('rate', 150)
+tts_engine.setProperty("rate", 150)
 
 st.markdown(
     '<div style="background-color:#1E90FF;padding:20px;border-radius:10px;text-align:center;">'
     '<h1 style="color:white;">AI Doctor Diagnose 🤖</h1></div>',
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
-st.markdown("<h3 style='text-align:center; color:black;'>Speak your symptoms and wait for the doctor</h3>",
-            unsafe_allow_html=True)
+st.markdown(
+    "<h3 style='text-align:center; color:black;'>Speak your symptoms and wait for the doctor</h3>",
+    unsafe_allow_html=True,
+)
 st.markdown("---")
 
 if "messages" not in st.session_state:
@@ -32,7 +34,7 @@ audio_data = mic_recorder(
     start_prompt="🎤 Start Recording",
     stop_prompt="🛑 Stop Recording",
     key="recorder",
-    use_container_width=True
+    use_container_width=True,
 )
 
 if audio_data and audio_data != st.session_state.last_audio_processed:
@@ -91,11 +93,11 @@ for msg in st.session_state.messages:
         st.markdown(
             f"<p style='text-align:right; background:#d9eaff; padding:10px; border-radius:10px;'>"
             f"<b>You:</b> {msg['content']}</p>",
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
     else:
         st.markdown(
             f"<p style='text-align:left; background:#f0f0f0; padding:10px; border-radius:10px;'>"
             f"<b>Doctor:</b> {msg['content']}</p>",
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
