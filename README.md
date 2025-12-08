@@ -7,6 +7,61 @@ This repository implements two conversational endpoints for mental health suppor
 
 Both endpoints are provided via a FastAPI service and can be run locally or in Docker.
 
+## Safety, Intended Users, and Ethical Considerations
+
+### Intended End-Users
+This system is designed for:
+- General users seeking emotional support or wellness-related guidance.
+- People who want basic, supportive conversation about stress, mood, daily challenges, or coping ideas.
+
+**Important:**  
+This system is **not a medical tool** and **not a replacement for a licensed mental-health professional**. It does not diagnose conditions or provide medical-level treatment advice.
+
+---
+
+### Boundaries of Guidance
+To ensure safe and ethical usage, both chat endpoints follow strict boundaries:
+- Provide **general mental-wellness support**, such as coping suggestions, grounding techniques, or emotional validation.
+- Avoid medical diagnosis, medication recommendations, or clinical instructions.
+- Redirect users who appear to be in crisis to **professional help** rather than continuing the conversation.
+
+---
+
+### Risk & Crisis Detection
+Although the system does not perform clinical risk assessment, it includes **basic safety heuristics**:
+- Detects sensitive or high-risk phrases (e.g., extreme distress).
+- Responds with supportive, non-clinical language.
+- Advises the user to seek **professional mental-health support**, trusted family members, or local emergency services.
+
+The model is intentionally prevented from giving instructions or descriptions related to self-harm or other unsafe behavior.
+
+---
+
+### Pre-Assessment Module (Optional Feature)
+We plan to include a small, optional pre-screening form in the user flow to:
+- Understand the user’s current emotional state
+- Ask whether they are receiving professional support
+- Determine if they may need immediate referral to licensed professionals
+
+Possible questions:
+- “How are you feeling right now?”
+- “Are you currently under care of a mental-health professional?”
+- “Do you feel safe at the moment?”
+
+High-risk answers are redirected to safe resources instead of generating normal chat responses.
+
+---
+
+### System Limitations
+- Not intended for clinical use  
+- May provide general suggestions only  
+- Cannot detect or diagnose mental-health conditions  
+- Crisis detection is basic and non-medical  
+
+Users who require medical or emergency support should always contact licensed professionals.
+
+
+
 ## Repository Layout
 
 - `src/Deployment/api_endpoint/main.py`: FastAPI app exposing `/Mic_Chat` and `/Medical_Chat`
@@ -100,6 +155,27 @@ All endpoints accept JSON with the shape:
   - Wrapper around `simpletransformers.t5` with an `mT5` model
   - Loads from the HF model path `YeBhoneLin10/FTL-Capstone-v2`
   - Uses CUDA automatically if available
+
+---
+
+### Evaluation Strategy
+Traditional accuracy metrics do not apply to mental-health conversational systems.  
+Instead, we use **safety-oriented evaluation**:
+
+1. **Response Safety Criteria**
+   - Avoid harmful content  
+   - Provide emotionally supportive but non-medical guidance  
+   - Respect user privacy and avoid hallucinated facts  
+
+2. **Human-in-the-Loop Review**
+   - Manual review of sample conversations  
+   - Labeling responses as: *safe*, *needs improvement*, *unsafe*  
+
+3. **Harmful-Content Detection**
+   - Checking for sensitive keywords  
+   - Ensuring RAG sources and model outputs remain within safe boundaries  
+
+This evaluation focuses on **helpfulness, appropriateness, and safety**, not model accuracy.
 
 ## How We Built
 
