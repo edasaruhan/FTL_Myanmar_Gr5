@@ -14,9 +14,15 @@ st.markdown(
 st.markdown("---")
 
 high_risk_keywords = [
-    "danger", "unsafe", "emergency", "hurt", 
-    "cannot cope", "overwhelmed", "panic attack"
+    "danger",
+    "unsafe",
+    "emergency",
+    "hurt",
+    "cannot cope",
+    "overwhelmed",
+    "panic attack",
 ]
+
 
 def is_high_risk(text):
     text_lower = text.lower()
@@ -32,16 +38,18 @@ if st.button("Send"):
     if user_input.strip():
 
         if is_high_risk(user_input):
-            st.session_state.messages.append({
-                "role": "assistant",
-                "content": (
-                    "It sounds like you're going through something really difficult. "
-                    "I'm not able to give detailed crisis or medical instructions, "
-                    "but you deserve support from someone who can help in the moment. "
-                    "Please consider talking with a trusted adult, a healthcare professional, "
-                    "or someone close to you who can support you right away."
-                )
-            })
+            st.session_state.messages.append(
+                {
+                    "role": "assistant",
+                    "content": (
+                        "It sounds like you're going through something really difficult. "
+                        "I'm not able to give detailed crisis or medical instructions, "
+                        "but you deserve support from someone who can help in the moment. "
+                        "Please consider talking with a trusted adult, a healthcare professional, "
+                        "or someone close to you who can support you right away."
+                    ),
+                }
+            )
         else:
             st.session_state.messages.append({"role": "user", "content": user_input})
 
@@ -51,7 +59,9 @@ if st.button("Send"):
             try:
                 response = requests.post(api_url, json=payload)
                 if response.status_code == 200:
-                    ai_reply = response.json().get("response", "Sorry, no response received.")
+                    ai_reply = response.json().get(
+                        "response", "Sorry, no response received."
+                    )
                 else:
                     ai_reply = f"Error: {response.status_code}"
             except Exception as e:

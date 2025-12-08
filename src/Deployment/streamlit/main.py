@@ -114,11 +114,14 @@ with video_col:
     )
 
 
-st.markdown("""
+st.markdown(
+    """
 <div style="background-color:#f8d7da;border-left:6px solid #d9534f;padding:20px;border-radius:8px;margin-top:20px;">
 <b style="font-size:20px;">⚠️ Important Safety Notice</b><br>
 This app provides general emotional support and wellness information only.  
 It is <b>not a medical service</b> and cannot diagnose conditions or provide professional mental-health advice.  
 If you are experiencing intense distress or feel unsafe, please contact a licensed professional or trusted individual immediately.
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
