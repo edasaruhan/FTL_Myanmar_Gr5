@@ -2,7 +2,6 @@ import streamlit as st
 
 st.set_page_config(page_title="MindCare", layout="wide")
 
-
 st.markdown(
     '<div style="background-color:#1E90FF;padding:40px;border-radius:10px;text-align:center;"><h1 style="color:white; font-size:60px;">MindCare 🤖</h1></div>',
     unsafe_allow_html=True,
@@ -113,3 +112,13 @@ with video_col:
         autoplay=True,
         muted=True,
     )
+
+
+st.markdown("""
+<div style="background-color:#f8d7da;border-left:6px solid #d9534f;padding:20px;border-radius:8px;margin-top:20px;">
+<b style="font-size:20px;">⚠️ Important Safety Notice</b><br>
+This app provides general emotional support and wellness information only.  
+It is <b>not a medical service</b> and cannot diagnose conditions or provide professional mental-health advice.  
+If you are experiencing intense distress or feel unsafe, please contact a licensed professional or trusted individual immediately.
+</div>
+""", unsafe_allow_html=True)
