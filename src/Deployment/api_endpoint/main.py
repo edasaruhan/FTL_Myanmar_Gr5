@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from Fine_tuned import medical_chat
+from Seq2Seq import medical_chat
 from RAG_pipeline import rag_flow, rag_pipeline
 from Schema import text_request
 
