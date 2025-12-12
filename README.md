@@ -66,7 +66,7 @@ Users who require medical or emergency support should always contact licensed pr
 
 - `src/Deployment/api_endpoint/main.py`: FastAPI app exposing `/Mic_Chat` and `/Medical_Chat`
 - `src/RAG_pipeline/`: RAG components (`Embedder`, `VectorStore`, prompt, generation)
-- `src/Fine_tuned/medical_chat.py`: Fine-tuned `mT5` chat wrapper
+- `src/Seq2Seq/medical_chat.py`: Train `mT5` chat wrapper
 - `src/Schema/text_request.py`: Pydantic request model (`{"user_input": str}`)
 - `Dockerfile`: Container image for the API server
 
